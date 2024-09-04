@@ -1,0 +1,19 @@
+
+
+Natural Language Processing (NLP) with spaCy:
+----------------------------------------------
+The code uses the spaCy library, specifically the small English model (en_core_web_sm), for text processing tasks. SpaCy is a popular NLP library in Python known for its efficiency and ease of use.
+
+Question-Answering with Hugging Face Transformers:
+--------------------------------------------------
+The transformers library from Hugging Face is used to create a question-answering pipeline. The code initializes this pipeline with the bert-large-uncased-whole-word-masking-finetuned-squad model, which is a fine-tuned BERT model for question-answering tasks.
+
+PDF Text Extraction with PyPDF:
+-------------------------------
+The pypdf library is used to read and extract text from PDF files. This allows the chatbot to process and analyze text content from PDF documents.
+Here’s a summary of the key tech stacks:
+
+spaCy for NLP tasks.
+Hugging Face Transformers for the question-answering model.
+PyPDF for extracting text from PDF files.
+These libraries together enable the chatbot to read and process text from PDFs, perform NLP tasks, and answer questions based on the extracted text.
