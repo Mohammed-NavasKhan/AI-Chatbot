@@ -67,3 +67,32 @@ python -c "import tensorflow as tf; print(tf.__version__)"
 
 Run the Script Again: After installing tf-keras, try running your script again:
 python light_chatbot.py
+
+
+If you need to use Langchain
+---------------------------
+
+Install LangChain
+pip install langchain
+
+Import LangChain in Your Script
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.llms import HuggingFaceHub  # or use OpenAI depending on your model
+
+Define a Prompt Template
+prompt_template = PromptTemplate(
+    input_variables=["context", "question"],
+    template="Given the following context: {context}. Answer the question: {question}"
+)
+
+ Initialize the LLMChain
+ llm_chain = LLMChain(
+    llm=HuggingFaceHub(model_name="distilbert-base-uncased"),  # Replace with your model
+    prompt=prompt_template
+)
+
+Modify the ask_question Function
+def ask_question(question):
+    response = llm_chain.run({"context": pdf_text, "question": question})
+    return response
