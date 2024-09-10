@@ -7,7 +7,6 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_community.llms import HuggingFaceHub
 import logging
 
-# Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
