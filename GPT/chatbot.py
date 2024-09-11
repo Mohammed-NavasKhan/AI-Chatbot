@@ -65,4 +65,4 @@ if file is not None:
                         st.write(response)
     except Exception as e:
         logger.error(f"An error occurred: {e}")
-        st.error("An error occurred while processing the file. Please try again.")
+        st.error(e)
