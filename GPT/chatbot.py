@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 HUGGINGFACE_API_TOKEN = "hf_SkQojHETEBQqnseFmIXIwhEPvMlRICxo"
 
-st.header("My first Chatbot")
+st.header("Ask questions from Chatbot")
 with st.sidebar:
     st.title("Your Documents")
     file = st.file_uploader(
