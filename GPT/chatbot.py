@@ -1,11 +1,13 @@
+"""Module providing a function QA generation."""
+import logging
 import streamlit as st
 from PyPDF2 import PdfReader
+from langchain.chains.question_answering import load_qa_chain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain.chains.question_answering import load_qa_chain
-from langchain_community.llms import HuggingFaceHub
-import logging
+from langchain_community.llms.huggingface_hub import HuggingFaceHub
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -37,8 +39,7 @@ if file is not None:
             chunks = text_splitter.split_text(text)
 
             embeddings = HuggingFaceEmbeddings(
-                model_name="sentence-transformers/all-MiniLM-L6-v2"
-            )
+                model_name="cointegrated/rubert-tiny")
             vector_store = FAISS.from_texts(chunks, embeddings)
 
             user_question = st.text_input("Type your question here")
@@ -53,14 +54,16 @@ if file is not None:
                         st.warning("No relevant information found.")
                     else:
                         llm = HuggingFaceHub(
-                            repo_id="google/flan-t5-small",
+                            repo_id="openai-community/gpt2",
+                            task="text-generation",
                             model_kwargs={"temperature": 0.5,
-                                          "max_length": 1000},
+                                          "max_length": 400},
                             huggingfacehub_api_token=HUGGINGFACE_API_TOKEN
                         )
                         chain = load_qa_chain(llm, chain_type="stuff")
                         response = chain.run(
                             input_documents=match, question=user_question)
+                        print(response)
                         st.write(response)
     except Exception as e:
         logger.error(f"An error occurred: {e}")
